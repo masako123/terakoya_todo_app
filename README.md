@@ -1,24 +1,20 @@
-# README
+課題: 「Web上でタスク管理するアプリケーションを作ってください」
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+基本要件
+- 登録してあるタスクを登録日順に一覧表示できること
+- タスクは登録した人・タスクの内容・登録日時・更新日時・締切日が登録・表示できること
+- タスクの新規登録・編集・更新・削除ができること
+- タスクには画像をつけることができる。
 
-Things you may want to cover:
+応用要件
+- タスクに「タスクの担当者」の項目を追加
+- タスクを締切日順で並び替えする機能の実装
+- タスクを担当者 / 登録した人 / 締切日の範囲で絞り込んで表示する機能の実装
+- 会員登録とログイン機能の実装
 
-* Ruby version
+制約条件
+- Rails(ver5.0以上)を使うこと
+- ソースはGitHubで新しいリポジトリを作って管理すること
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+そのほか
+- scaffoldを使っても直でrails new で作ってもどちらでも良いです。
