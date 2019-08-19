@@ -10,10 +10,9 @@
   <%= @task.content %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @task.image %>
-</p>
+<% if @task.image.attached? %>
+  <%= image_tag @task.image %>
+<% end %>
 
 <p>
   <strong>Deadline:</strong>
