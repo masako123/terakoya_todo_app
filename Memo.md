@@ -12,21 +12,6 @@ taskモデルに下記を追加
 has_one_attached :image
 
 controllerとviewの変更
-```class TasksController < ApplicationController
-...
-def create
-    @task = current_user.posts.new params.require(:post).permit(:content, :image)
-    ...（省略）
-end
-
-def update
-    respond_to do |format|
-      if @task.update params.require(:post).permit(:content, :image)
-    ...
-end
-```
-
-<%= form.select :user_id, Category.pluck(:name, :id), {include_blank: '選択ボックス'}, {class: 'sample'} %>
 
 
 ### 次やること
