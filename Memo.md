@@ -11,8 +11,11 @@ rails db:migrate
 taskモデルに下記を追加
 has_one_attached :image
 
-### 次やること
-- ログインしているcurrent_userがタスクを登録できるのでタスクにUser入力欄は不要
-- ビューにおいては登録時に　assigned_user_idではなくassigned_userのnameが選択できるようにしたい
+controllerとviewの変更
 
-- 
+
+### 次やること
+- ログインしているcurrent_userがタスクを登録できるのでタスク登録時にUser入力欄は不要、show画面には登録したuser.nameは必要
+- 登録時にassigned_user_idではなくassigned_userのnameが選択できるようにしたい
+- 自分が登録したtaskとassignされたtaskは見られる、それ以外は？？
+
