@@ -13,6 +13,8 @@ has_one_attached :image
 
 controllerとviewの変更
 
+### 
+
 
 ### 次やること
 - ログインしているcurrent_userがタスクを登録できるのでタスク登録時にUser入力欄は不要、show画面には登録したuser.nameは必要
