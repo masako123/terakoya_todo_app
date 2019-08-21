@@ -7,9 +7,14 @@ John = User.create(email: "john@example.com", password: "password", username: "J
 Tom = User.create(email: "tom@example.com", password: "password", username: "Tom")
 puts User.count
 
-Workout = Task.create(name: "Go to gym", assignee_id: 1, user_id: 1)
-Booking = Task.create(name: "Book hotel", assignee_id: 2, user_id: 1)
-Meeting = Task.create(name: "Make agenda for MTG", assignee_id: 3, user_id: 2)
-Editting = Task.create(name: "Edit todo application code", assignee_id: 4, user_id: 5)
-
-
+Task.delete_all
+Workout = Task.create(name: "Go to gym", assignee: Masako, user: Masako) 
+Booking = Task.create(name: "Book a hotel", assignee: Bob, user: Masako)
+Meeting = Task.create(name: "Make agenda for MTG", assignee: Alice, user: Bob)
+Editting = Task.create(name: "Edit todo_application code", assignee: John, user: Tom)
+Eamil = Task.create(name: "Email to Mr.Smith", assignee: Masako, user: Tom)
+Lunch = Task.create(name: "Lunch meeting", assignee: Masako, user: Alice)
+Businesstrip = Task.create(name: "Fix schedule", assignee: Bob, user: John)
+Booking2 = Task.create(name: "Book a flight to Fukuoka", assignee: Bob, user: Bob)
+Meeting2 = Task.create(name: "Share meeting minutes", assignee: John, user: Alice)
+Party = Task.create(name: "Decide venue for opening party", assignee: Tom, user: John)

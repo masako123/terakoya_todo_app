@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = current_user.tasks.new params.require(:task).permit(:content, :image)
+    @task = current_user.tasks.new task_params
 
     respond_to do |format|
       if @task.save
@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update params.require(:task).permit(:content, :image)
+      if @task.update task_params
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else

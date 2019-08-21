@@ -8,9 +8,9 @@
       <th>Name</th>
       <th>Content</th>
       <th>Image</th>
-      <th>Deadline</th>
-      <th>Assigned user</th>
-      <th>User</th>
+      <th>締切</th>
+      <th>担当者</th>
+      <th>登録者</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,8 +22,8 @@
         <td><%= task.content %></td>
         <td><%= task.image %></td>
         <td><%= task.deadline %></td>
-        <td><%= task.assigned_user_id %></td>
-        <td><%= task.user %></td>
+        <td><%= task.assignee.username %></td>
+        <td><%= task.user.username %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
