@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   belongs_to :assignee, :class_name => 'User'
   has_one_attached :image
   scope :order_by_created_at, -> {order(:created_at)}
+  enum status: {undone: 0, done: 1}
 
   before_validation :add_assignee, on: [ :create, :update ]
 
@@ -11,8 +12,20 @@ class Task < ApplicationRecord
   end
 
   def done
-    binding.pry
-
+    self.status = 1
   end
+
+  def toggle_status
+    if undone?
+        done!
+    else 
+        undone!
+    end
+    # status
+  end
+
+  # def default_image
+  #   "/post_default_image.png"
+  # end
 
 end
