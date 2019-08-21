@@ -31,14 +31,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :assigned_user_id %>
-    <%# <%= form.number_field :assigned_user_id %> %>
-    <%= form.select :user_id, User.pluck(:name, :id), {include_blank: '選択ボックス'} %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label :assignee %>
+    <%= form.select :username, User.pluck(:username, :id), {include_blank: '選択ボックス'} %>
   </div>
 
   <div class="actions">
