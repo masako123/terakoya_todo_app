@@ -15,8 +15,8 @@
 <% end %>
 
 <p>
-  <strong>Deadline:</strong>
-  <%= @task.deadline %>
+  <strong>Due Date:</strong>
+  <%= @task.due_date_at %>
 </p>
 
 <p>
@@ -27,6 +27,16 @@
 <p>
   <strong>User:</strong>
   <%= @task.user.username %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @task.created_at %>
+</p>
+
+<p>
+  <strong>Update at:</strong>
+  <%= @task.updated_at %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
