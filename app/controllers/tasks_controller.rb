@@ -4,8 +4,51 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order_by_created_at
+    # /tasks　でcreated_at順にsortされたTask.allが表示される。
+    # /tasks?order_by=due_date_at　でdue_date_at順にsortされたTask.allが表示される。
+    # /tasks?assignee_id=1 で指定したassigneeごとのtasksが表示される。
+    # /tasks?user_id=1 で指定したuserごとのtasksが表示される。
+    # /tasks?due_date_at=2019-01-01 で指定した日付のtasksが表示される。
+    # /tasks?order_by=due_date_at＆assignee_id=1&user_id=1&due_date_at=2019-01-01
+
+    if params[:order_by].present?
+      target_column = params[:order_by].to_sym
+    else
+      target_column = :created_at
+    end
+    @tasks = Task.order_by(target_column)
+    
+    
+    if params[:assignee_id].present?
+      @assignee = User.find(params[:assignee_id])
+      @tasks = @tasks.by_assignee(@assignee)
+    end
+
+    if params[:user_id].present?
+      @user = User.find(params[:user_id])
+      @tasks = @tasks.by_user(@user)
+    end
+
+    if params[:due_date_at].present?
+      @date = params[:due_date_at].to_sym
+      @tasks = @tasks.by_due_date_at(@date)
+    end
+
   end
+
+  
+
+  # 締切日、担当者、登録者ごとに絞り込み表示させる
+  # def search
+
+  #   if params[:due_date_at].present? 
+  #     @tasks = @tasks.by_due_date_at(date)
+  #   end
+  #   
+  #   if params[:user].present?
+  #     @tasks = @tasks.by_user(user)
+  #   end
+  # end
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -69,6 +112,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :content, :image, :deadline, :assigned_user_id, :user_id)
+      params.require(:task).permit(:name, :content, :image, :due_date_at, :assigned_user_id, :user_id)
     end
 end

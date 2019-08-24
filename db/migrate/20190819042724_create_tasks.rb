@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :content
       # t.string :image
-      t.datetime :deadline
+      t.date :due_date_at
       t.integer :assignee_id
       t.integer :user_id
       # t.references :user, foreign_key: true
