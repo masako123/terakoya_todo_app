@@ -1,23 +1,23 @@
 class TasksController < ApplicationController
+  before_action :sign_in_required, only: [:show]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    # /tasks　でcreated_at順にsortされたTask.allが表示される。
-    # /tasks?order_by=due_date_at　でdue_date_at順にsortされたTask.allが表示される。
-    # /tasks?assignee_id=1 で指定したassigneeごとのtasksが表示される。
-    # /tasks?user_id=1 で指定したuserごとのtasksが表示される。
-    # /tasks?due_date_at=2019-01-01 で指定した日付のtasksが表示される。
+    # /tasks　-> created_at順にsortされたTask.allが表示される。
+    # /tasks?order_by=due_date_at　-> due_date_at順にsortされたTask.allが表示される。
+    # /tasks?assignee_id=1 -> 指定したassigneeごとのtasksが表示される。
+    # /tasks?user_id=1 -> 指定したuserごとのtasksが表示される。
+    # /tasks?due_date_at=2019-01-01 -> 指定した日付のtasksが表示される。
     # /tasks?order_by=due_date_at＆assignee_id=1&user_id=1&due_date_at=2019-01-01
 
     if params[:order_by].present?
-      target_column = params[:order_by].to_sym
+      column = params[:order_by].to_sym
     else
-      target_column = :created_at
+      column = :created_at
     end
-    @tasks = Task.order_by(target_column)
-    
+    @tasks = Task.order_by(column)
     
     if params[:assignee_id].present?
       @assignee = User.find(params[:assignee_id])
@@ -35,20 +35,6 @@ class TasksController < ApplicationController
     end
 
   end
-
-  
-
-  # 締切日、担当者、登録者ごとに絞り込み表示させる
-  # def search
-
-  #   if params[:due_date_at].present? 
-  #     @tasks = @tasks.by_due_date_at(date)
-  #   end
-  #   
-  #   if params[:user].present?
-  #     @tasks = @tasks.by_user(user)
-  #   end
-  # end
 
   # GET /tasks/1
   # GET /tasks/1.json

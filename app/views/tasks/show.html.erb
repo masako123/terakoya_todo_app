@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>タスク名:</strong>
   <%= @task.name %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>内容:</strong>
   <%= @task.content %>
 </p>
 
@@ -15,27 +15,27 @@
 <% end %>
 
 <p>
-  <strong>Due Date:</strong>
+  <strong>期限日:</strong>
   <%= @task.due_date_at %>
 </p>
 
 <p>
-  <strong>Assigned user:</strong>
+  <strong>担当者:</strong>
   <%= @task.assignee.username %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>登録者:</strong>
   <%= @task.user.username %>
 </p>
 
 <p>
-  <strong>Created at:</strong>
+  <strong>作成日時:</strong>
   <%= @task.created_at %>
 </p>
 
 <p>
-  <strong>Update at:</strong>
+  <strong>更新日時:</strong>
   <%= @task.updated_at %>
 </p>
 
