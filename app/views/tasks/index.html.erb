@@ -13,7 +13,7 @@
     
       </nav>
     </menu>
-    
+
 <h1>Tasks</h1>
 
 <table>
@@ -36,7 +36,12 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.content %></td>
-        <td><%= task.image %></td>
+        <td><% if task.image.attached? %>
+              <%= image_tag task.image.variant(resize: "64x64").processed %>
+            <% else %>
+              <%= image_tag task.default_image, size:'64x64' %>
+            <% end %>
+        </td>
         <td><%= task.due_date_at %></td>
         <td><%= task.assignee.username %></td>
         <td><%= task.user.username %></td>

@@ -9,7 +9,7 @@ class Task < ApplicationRecord
   # scope :order_by_due_date_at, -> {order(:due_date_at)}
   # 上２つを下記にまとめる
   scope :order_by, ->(column) {order(column)}
-  
+
   scope :by_due_date_at, ->(date) {where(due_date_at: date)}
   scope :by_assignee, ->(assignee) {where(assignee: assignee)}
   scope :by_user, ->(user) {where(user: user)}
@@ -27,8 +27,8 @@ class Task < ApplicationRecord
     # status
   end
 
-  # def default_image
-  #   "/task_default_image.png"
-  # end
+  def default_image
+    "/task_default_image.png"
+  end
 
 end
