@@ -12,8 +12,11 @@
   <body>
     <header>
       <nav>
+          <%= link_to 'ホーム', tasks_path %>
+      </nav>
+      <nav>
         <% if user_signed_in? %>
-          <strong><%= link_to current_user.username, pages_show_path %></strong>
+          <strong><%= link_to current_user.username, "/user/#{current_user.id}" %></strong>
           <%= link_to 'プロフィール変更', edit_user_registration_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
@@ -23,8 +26,16 @@
       </nav>
     </header>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <menu>
+      <nav>
+        <%= select_tag 'order_by', options_for_select(['作成日', '期限日']), {include_blank: '並べ替え'} %>
+        <%= link_to '自分への割り当て', "/tasks?assignee_id=#{current_user.id}" %>
+        <%= select_tag 'assignee', options_for_select(User.pluck(:username, :id)), {include_blank: '担当者を選択'} %>
+        <%= select_tag 'user', options_for_select(User.pluck(:username, :id)), {include_blank: '登録者を選択'} %>
+        <%= select_tag 'duedate', options_for_select(Task.pluck(:due_date_at).uniq), {include_blank: '期限日を選択'} %>
+    
+      </nav>
+    </menu>
 
     <%= yield %>
   </body>

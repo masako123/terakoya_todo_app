@@ -18,7 +18,5 @@ Taskモデルにstatusカラムを追加するマイグレーションを作成
 rails g migration add_status_to_task status:integer
 rails db:migrate
 
-### 次やること
-- ログインしているcurrent_userがタスクを登録できるのでタスク登録時にUser入力欄は不要、show画面には登録したuser.nameは必要
-- 自分が登録したtaskとassignされたtaskは見られる、それ以外は？？
+<%= select_tag '並び替え', options_for_select(<%= link_to '作成日', "/tasks" %>, "1"], [<%= link_to '期限日', "/tasks?order_by=due_date_at" %>, "2"), {include_blank: '選択ボックス'} %>
 
