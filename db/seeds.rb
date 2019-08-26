@@ -7,6 +7,7 @@ John = User.create(email: "john@example.com", password: "password", username: "J
 Tom = User.create(email: "tom@example.com", password: "password", username: "Tom")
 puts User.count
 
+
 Task.delete_all
 Workout = Task.create(name: "Go to gym", assignee: Masako, user: Masako, created_at: 1.days.ago, due_date_at: 1.days.from_now) 
 Booking = Task.create(name: "Book a hotel", assignee: Bob, user: Masako, created_at: 13.days.ago, due_date_at: 3.days.from_now)

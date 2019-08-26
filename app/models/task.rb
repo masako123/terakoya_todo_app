@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 30 }
   belongs_to :user
   belongs_to :assignee, :class_name => 'User'
   has_one_attached :image
@@ -30,5 +31,4 @@ class Task < ApplicationRecord
   def default_image
     "/task_default_image.png"
   end
-
 end
