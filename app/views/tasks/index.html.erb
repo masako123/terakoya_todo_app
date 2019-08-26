@@ -7,15 +7,14 @@
         <%= link_to '自分への割り当て', "/tasks?assignee_id=#{current_user.id}" %>
       <% end %>
       <%= form_with(url: 'tasks#index', method: "get", local: true) do |form| %>
-        <%= select_tag 'order_by', options_for_select([['作成日', 'created_at'], ['期限日', 'due_date_at']]), {include_blank: '並べ替え'} %>
-        <%= select_tag 'assignee_id', options_for_select(User.pluck(:username, :id)), {include_blank: '担当者を選択'} %>
-        <%= select_tag 'user_id', options_for_select(User.pluck(:username, :id)), {include_blank: '登録者を選択'} %>
-        <%= select_tag 'due_date_at', options_for_select(Task.pluck(:due_date_at).uniq), {include_blank: '期限日を選択'} %>
+        <%= select_tag 'order_by', options_for_select([['作成日', 'created_at'], ['期限日', 'due_date_at']], { :selected => params[:order_by] }), {include_blank: '並べ替え'} %>
+        <%= select_tag 'assignee_id', options_for_select(User.pluck(:username, :id), { :selected => params[:assignee_id] }), {include_blank: '担当者を選択'} %>
+        <%= select_tag 'user_id', options_for_select(User.pluck(:username, :id), { :selected => params[:user_id] }), {include_blank: '登録者を選択'} %>
+        <%= select_tag 'due_date_at', options_for_select(Task.pluck(:due_date_at).uniq, { :selected => params[:due_date_at] }), {include_blank: '期限日を選択'} %>
         <%= form.submit %>
       <% end %>
       </nav>
     </menu>
-
 
 <table>
   <thead>
