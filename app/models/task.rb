@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
+  validates :content, length: {maximum: 150}
   belongs_to :user
   belongs_to :assignee, :class_name => 'User'
   has_one_attached :image
@@ -19,13 +20,12 @@ class Task < ApplicationRecord
       self.assignee_id = user_id unless assignee_id?
   end
 
-  def toggle_status
+  def toggle_status!
     if undone?
         done!
     else 
         undone!
     end
-    # status
   end
 
   def default_image

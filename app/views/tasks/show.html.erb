@@ -31,12 +31,17 @@
 
 <p>
   <strong>作成日時:</strong>
-  <%= @task.created_at %>
+  <%= simple_time(@task[:created_at]) %>
 </p>
 
 <p>
   <strong>更新日時:</strong>
-  <%= @task.updated_at %>
+  <%= simple_time(@task[:updated_at]) %>
+</p>
+
+<p>
+  <strong>進捗:</strong>
+  <%= link_to @task.status_i18n, task_toggle_status_path(@task), method: :patch %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

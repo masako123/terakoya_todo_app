@@ -1,0 +1,6 @@
+ja:
+  enums:
+    task:
+      status:
+        done: 完了済み
+        undone: 未完了
