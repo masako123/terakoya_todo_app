@@ -74,3 +74,4 @@ gem 'pry'
 gem 'mini_magick', '~> 4.8'
 
 gem 'enum_help'
+gem 'jquery-rails'
