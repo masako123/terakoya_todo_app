@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :sign_in_required, only: [:show]
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /tasks
   # GET /tasks.json
@@ -34,6 +34,11 @@ class TasksController < ApplicationController
       @tasks = @tasks.by_due_date_at(@date)
     end
 
+  end
+
+  def toggle_status
+    @task.toggle_status!
+    redirect_to @task, notice: "タスクが「#{@task.status_i18n}」に更新されました。"
   end
 
   # GET /tasks/1
@@ -93,7 +98,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      @task = Task.find(params[:id] || params[:task_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -9,7 +9,7 @@ puts User.count
 
 
 Task.delete_all
-Workout = Task.create(name: "Go to gym", assignee: Masako, user: Masako, created_at: 1.days.ago, due_date_at: 1.days.from_now) 
+Workout = Task.create(name: "Go to gym", assignee: Masako, user: Masako, created_at: 1.days.ago, due_date_at: 1.days.from_now, status: :done) 
 Booking = Task.create(name: "Book a hotel", assignee: Bob, user: Masako, created_at: 13.days.ago, due_date_at: 3.days.from_now)
 Meeting = Task.create(name: "Make agenda for MTG", assignee: Alice, user: Bob, created_at: 13.days.ago, due_date_at: 5.days.from_now)
 Editting = Task.create(name: "Edit todo_application code", assignee: John, user: Tom, created_at: 13.days.ago, due_date_at: 7.days.from_now)
@@ -53,3 +53,5 @@ Party = Task.create(name: "Decide venue for opening party", assignee: Tom, user:
 # user = User.first
 # user.assigned_tasks.pluck(:user_id).uniq[0] == user.id
 #=> true
+
+# Doneしたタスク

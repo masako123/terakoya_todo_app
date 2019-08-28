@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     root :to => "devise/sessions#new"
   end
   get 'user/:id' => "users#show"
-  resources :tasks
+  
+  resources :tasks do
+    patch :toggle_status
+  end
 
   devise_for :users
 
