@@ -19,4 +19,3 @@ rails g migration add_status_to_task status:integer
 rails db:migrate
 
 ## Taskの完了・未完了を表示させる
-

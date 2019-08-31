@@ -11,7 +11,7 @@
         <%= select_tag 'assignee_id', options_for_select(User.pluck(:username, :id), { :selected => params[:assignee_id] }), {include_blank: '担当者を選択'} %>
         <%= select_tag 'user_id', options_for_select(User.pluck(:username, :id), { :selected => params[:user_id] }), {include_blank: '登録者を選択'} %>
         <%= select_tag 'due_date_at', options_for_select(Task.pluck(:due_date_at).uniq, { :selected => params[:due_date_at] }), {include_blank: '期限日を選択'} %>
-        <%= form.submit %>
+        <%= form.submit "実行" %>
       <% end %>
       </nav>
 </menu>
@@ -34,20 +34,16 @@
 
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
-        <td>
+      <tr class="task">
+        <td class="checkbox" id=<%= task.id %>>
           <% if task.done? %>
-            <%= check_box_tag :status, 1, {:checked => "checked"}  %>
-          <% else %>
-            <%= check_box_tag :status, 0  %>
+            <%= check_box :status, :undone, {:checked => "checked"}  %>
+          <% else %> 
+            <%= check_box :status, :done, {}  %>
           <% end %>
         </td>
-        <td>
-          <% if task.done? %>
-            <div class="done-task-name"><%= task.name %></div>
-          <% else %>
-            <%= task.name %>
-          <% end %>
+        <td id="task-name">
+          <div id="task_<%= task.id %>_status" class=<%= "done-task-name" if task.done? %>><%= task.name %></div>
         </td>
         <td><%= task.content %></td>
         <td><% if task.image.attached? %>
@@ -73,4 +69,31 @@
 
 <%= link_to 'New Task', new_task_path %>
 
+<script type="text/javascript">
+ $('.checkbox').on('click', function(){
+    const id =  $(this).attr("id");
+    $.ajax({
+      type: "PATCH",
+      url: "/tasks/" + id + "/toggle_status",
+      contentType: "application/json",
+      dataType: "json"
+    }).done(function(data, textStatus, jqXHR){
+      console.log(data)
+      console.log(data.status)
+      // console.log(data.id)
+      const task_status_id = "#task_" + id + "_status"
+      // const hoge = $('.task').find('.done-task-name').text();
+      // console.log(hoge)
+      if ($(task_status_id).hasClass("done-task-name")) {
+        $(task_status_id).removeClass("done-task-name");
+      } else {
+        $(task_status_id).addClass("done-task-name");
+      }
+      
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      // エラーの場合処理
+    });
+  });
+
+</script>
 

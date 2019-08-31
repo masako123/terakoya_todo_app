@@ -2,5 +2,24 @@
 
 <%= render 'form', task: @task %>
 
+<p id="task_status">
+  <strong>進捗:</strong>
+  <%= @task.status_i18n %>
+</p>
+
+
+<script type="text/javascript">
+   function status() {
+    document.getElementById('task_status').innerHTML = "未完了"
+  }
+</script>
+
+<% if @task.status == 0 %>
+    <input type="checkbox" value="完了済み" onclick=status()>完了済み
+<% else %>
+    <input type="checkbox" value="未完了" onclick=status()>未完了
+<% end %>
+
+
 <%= link_to 'Show', @task %> 
 <%= link_to 'Back', tasks_path %>
