@@ -81,15 +81,22 @@
       console.log(data)
       console.log(data.status)
       // console.log(data.id)
-      const task_status_id = "#task_" + id + "_status"
+      const task_id_status = "#task_" + id + "_status"
       // const hoge = $('.task').find('.done-task-name').text();
       // console.log(hoge)
-      if ($(task_status_id).hasClass("done-task-name")) {
-        $(task_status_id).removeClass("done-task-name");
+      if ($(task_id_status).hasClass("done-task-name")) {
+        $(task_id_status).removeClass("done-task-name");
       } else {
-        $(task_status_id).addClass("done-task-name");
+        $(task_id_status).addClass("done-task-name");
       }
-      
+      $.ajax({
+        type: "GET",
+        url: "/tasks" ,
+        contentType: "application/json",
+        dataType: "json"
+      }).done(function(data, textStatus, jqXHR){
+        console.log(data)
+      })
     }).fail(function(jqXHR, textStatus, errorThrown){
       // エラーの場合処理
     });
