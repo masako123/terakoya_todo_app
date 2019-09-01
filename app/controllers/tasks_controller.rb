@@ -38,17 +38,14 @@ class TasksController < ApplicationController
   end
 
   def toggle_status
-    @task.toggle_status!
-    
-    # # doneしているtaskのidの配列
-    # @tasks.where(status: 1).pluck(:id)
-    # # doneしていないtaskのidの配列
-    # @tasks.where(status: 0).pluck(:id)
-
-    if request.xhr?
-      render json: @task.as_json 
+    if @task.toggle_status!
+      if request.xhr?
+        render json: @task.as_json 
+      else 
+        redirect_to @task, notice: "タスク「#{@task.name}」が「#{@task.status_i18n}」に更新されました。"
+      end
     else
-      redirect_to @task, notice: "タスク「#{@task.name}」が「#{@task.status_i18n}」に更新されました。"
+      render json: @task.errors, status: :unprocessable_entity
     end
   end
 
