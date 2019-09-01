@@ -80,6 +80,13 @@
     }).done(function(data, textStatus, jqXHR){
       console.log(data)
       console.log(data.status)
+      const message = "タスク「" + data.name + "」が" + data.status + "に更新されました"
+      $('#notice').html(message);
+      function hideNotice() {
+        $('#notice').html('');
+      }
+      setTimeout(hideNotice, 2000);
+
       // console.log(data.id)
       const task_id_status = "#task_" + id + "_status"
       // const hoge = $('.task').find('.done-task-name').text();
@@ -89,16 +96,14 @@
       } else {
         $(task_id_status).addClass("done-task-name");
       }
-      $.ajax({
-        type: "GET",
-        url: "/tasks" ,
-        contentType: "application/json",
-        dataType: "json"
-      }).done(function(data, textStatus, jqXHR){
-        console.log(data)
-      })
-    }).fail(function(jqXHR, textStatus, errorThrown){
-      // エラーの場合処理
+    }).fail(function(data, textStatus, errorThrown){
+      const errorMessage = "Error:" + data.statusText
+      $('#notice').html(errorMessage);
+      function hideNotice() {
+        $('#notice').html('');
+      }
+      setTimeout(hideNotice, 2000);
+      // console.log(data.statusText);
     });
   });
 
